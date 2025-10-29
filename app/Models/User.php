@@ -17,6 +17,7 @@ final class User extends Authenticatable
 
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
     use Notifiable;
 
     /**
@@ -58,6 +59,6 @@ final class User extends Authenticatable
      */
     public function newsArticles() : hasMany
     {
-        return $this->hasMany( NewsArticle::class);
+        return $this->hasMany(NewsArticle::class);
     }
 }
