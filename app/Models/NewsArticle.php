@@ -26,6 +26,7 @@ final class NewsArticle extends Model
         'image_path',
         'is_published',
         'published_at',
+        'user_id',
     ];
 
     /**

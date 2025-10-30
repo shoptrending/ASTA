@@ -20,7 +20,6 @@
 
             <form method="POST" action="{{ route('admin.news.store') }}">
                 @csrf
-
                 <div class="mb-3">
                     <label for="title" class="form-label">Titel</label>
                     <input type="text"
@@ -46,15 +45,15 @@
                     @enderror
                 </div>
 
-                <div class="form-check mb-3">
-                    <input type="checkbox"
-                           class="form-check-input"
-                           id="is_published"
-                           name="is_published"
-                           value="1"
-                        {{ old('is_published') ? 'checked' : '' }}>
-                    <label class="form-check-label" for="is_published">Publiceren</label>
-                </div>
+{{--                <div class="form-check mb-3">--}}
+{{--                    <input type="checkbox"--}}
+{{--                           class="form-check-input"--}}
+{{--                           id="is_published"--}}
+{{--                           name="is_published"--}}
+{{--                           value="1"--}}
+{{--                        {{ old('is_published') ? 'checked' : '' }}>--}}
+{{--                    <label class="form-check-label" for="is_published">Publiceren</label>--}}
+{{--                </div>--}}
 
                 <div class="mb-3">
                     <label for="published_at" class="form-label">Publicatiedatum (optioneel)</label>

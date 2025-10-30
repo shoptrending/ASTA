@@ -6,7 +6,9 @@ namespace App\Http\Controllers;
 
 use App\Contracts\Controller;
 use App\Models\NewsArticle;
+use App\Models\User;
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -27,7 +29,7 @@ final class AdminNewsController extends Controller
     /**
      * Show a form to create a news article.
      */
-    public function createArticle()
+    public function createArticle() : View
     {
         return view('admin.news.create');
     }
@@ -35,17 +37,18 @@ final class AdminNewsController extends Controller
     /**
      * Store a new article.
      */
-    public function store(Request $request)
+    public function store(Request $request) : RedirectResponse
     {
+        // Todo: add user_id when login is done.
         $data = $request->validate([
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
             'is_published' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
+//            'user_id' => ['nullable', 'exists:users,id'],
         ]);
 
-        $data['is_published'] = (bool) ($data['is_published'] ?? false);
-        $data['slug'] = Str::slug($data['title']);
+        $user = User::where('username', '=', 'admin')->first();
 
         // Ensure unique slug on minimal way...
         if (NewsArticle::where('slug', $data['slug'])->exists())
@@ -53,7 +56,14 @@ final class AdminNewsController extends Controller
             $data['slug'] .= '-' . Str::random(6);
         }
 
-        NewsArticle::create($data);
+        NewsArticle::create([
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'is_published' => $data['is_published'] ?? false,
+            'published_at' => $data['published_at'] ?? now(),
+            'slug' => Str::slug($data['slug']),
+            'user_id' => $user->id,
+        ]);
 
         return redirect()->route('admin.news.index')->with('status', 'Artikel toegevoegd');
     }

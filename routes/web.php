@@ -19,5 +19,7 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::get('/admin', [AdminNewsController::class, 'index'])->name('admin.news.index');
 Route::get('/admin/create', [AdminNewsController::class, 'createArticle'])->name('admin.news.create');
+
 Route::post('/admin', [AdminNewsController::class, 'store'])->name('admin.news.store');
+
 // });
