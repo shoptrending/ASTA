@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use App\Contracts\Controller;
+use App\Http\Requests\StoreNewsArticleRequest;
 use App\Models\NewsArticle;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -37,16 +38,10 @@ final class AdminNewsController extends Controller
     /**
      * Store a new article.
      */
-    public function store(Request $request) : RedirectResponse
+    public function store(StoreNewsArticleRequest $request) : RedirectResponse
     {
         // Todo: add user_id when login is done.
-        $data = $request->validate([
-            'title' => ['required', 'string', 'max:255'],
-            'content' => ['required', 'string'],
-            'is_published' => ['nullable', 'boolean'],
-            'published_at' => ['nullable', 'date'],
-//            'user_id' => ['nullable', 'exists:users,id'],
-        ]);
+        $data = $request->validated();
 
         $user = User::where('username', '=', 'admin')->first();
 
