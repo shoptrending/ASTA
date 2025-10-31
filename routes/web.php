@@ -6,10 +6,7 @@ use App\Http\Controllers\AdminNewsController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', fn () => view('welcome'))->name('home');
-Route::get('/login', [AuthController::class, 'login'])->name('login');
-
-Route::get('/', fn () => view('welcome'))->name('home');
+Route::get('/', fn () => view('pages.welcome'))->name('home');
 Route::get('/login', [AuthController::class, 'login'])->name('login');
 
 // Todo: add the middleware when a login page is added...

@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
+/** @untested */
 class StoreNewsArticleRequest extends FormRequest
 {
     /**
@@ -11,7 +12,7 @@ class StoreNewsArticleRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,7 @@ class StoreNewsArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'max:255'],
+            'title' => ['required', 'string', 'min:3','max:255'],
             'content' => ['required', 'string'],
             'is_published' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],

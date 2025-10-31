@@ -24,7 +24,6 @@ final class NewsArticleFactory extends Factory
         return [
             'user_id' => 1,
             'title' => $title,
-            'slug' => Str::slug($title),
             'content' => fake()->paragraphs(3, true),
             'image' => null,
             'is_published' => fake()->boolean(70),
