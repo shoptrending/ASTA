@@ -86,7 +86,7 @@ final class NewsController extends Controller
             'published_at' => $data['published_at'] ?? now(),
         ]);
 
-        return redirect()->route('admin.news.index')->with('status', 'Artikel toegevoegd');
+        return redirect()->route('admin.news.index')->with('status', 'Artikel bijgewerkt');
     }
 
     /**

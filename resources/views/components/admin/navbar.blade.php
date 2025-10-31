@@ -44,6 +44,14 @@
                         Vacatures
                     </a>
                 </li>
+                <li class="nav-item px-3">
+                    <a
+                        class="nav-link {{ request()->routeIs('admin.contact.*') ? 'active' : '' }}"
+                        href="{{ route('admin.contact.index') }}"
+                    >
+                        Contact
+                    </a>
+                </li>
             </ul>
 
             {{-- Logout button --}}
