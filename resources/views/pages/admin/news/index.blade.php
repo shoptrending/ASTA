@@ -5,24 +5,37 @@
 
     <x-button href="{{ route('admin.news.create') }}">Nieuw artikel</x-button>
 
-    @if($articles->isEmpty())
-        <div class="alert alert-secondary">Nog geen artikelen...</div>
-    @else
-        <table class="table table-striped">
-            <thead>
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <th>Titel</th>
+            <th class="text-center">Gepubliceerd</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        @forelse($articles as $article)
+
             <tr>
-                <th>Titel</th>
-                <th>Gepubliceerd</th>
+                <td>
+                    <a href="{{ route('admin.news.edit', $article) }}" class="text-secondary me-2 hover pr-2" title="Bewerken">
+                        <i class="bi bi-pencil"></i>
+                    </a>
+                    {{ $article->title }}
+                </td>
+
+                @if($article->is_published)
+                    <td class="text-center"><i class="bi bi-check-lg text-success fs-4" /></td>
+                @else
+                    <td class="text-center"><i class="bi bi-x-lg text-danger fs-4" /></td>
+                @endif
+
             </tr>
-            </thead>
-            <tbody>
-            @foreach ($articles as $a)
-                <tr>
-                    <td>{{ $a->title }}</td>
-                    <td>{{ $a->is_published ? 'Ja' : 'Nee' }}</td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
-    @endif
+
+        @empty
+            <div class="alert alert-secondary">Nog geen artikelen...</div>
+        @endforelse
+
+        </tbody>
+    </table>
 @endsection

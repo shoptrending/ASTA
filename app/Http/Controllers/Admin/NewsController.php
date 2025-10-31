@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Contracts\Controller;
 use App\Http\Requests\StoreNewsArticleRequest;
@@ -10,13 +10,12 @@ use App\Models\NewsArticle;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Str;
 
 /** @untested-ignore */
-final class AdminNewsController extends Controller
+final class NewsController extends Controller
 {
     /**
-     * Show the admin dashboard.
+     * Show all news articles.
      */
     public function index() : View
     {
@@ -29,7 +28,7 @@ final class AdminNewsController extends Controller
     /**
      * Show a form to create a news article.
      */
-    public function createArticle() : View
+    public function create() : View
     {
         return view('pages.admin.news.create');
     }
@@ -53,5 +52,13 @@ final class AdminNewsController extends Controller
         ]);
 
         return redirect()->route('admin.news.index')->with('status', 'Artikel toegevoegd');
+    }
+
+    /**
+     * update an existing article.
+     */
+    public function update() : View
+    {
+        //
     }
 }

@@ -23,7 +23,7 @@ class StoreNewsArticleRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => ['required', 'string', 'min:3','max:255'],
+            'title' => ['required', 'string', 'min:3','max:255', 'unique:news_articles,title'],
             'content' => ['required', 'string'],
             'is_published' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
