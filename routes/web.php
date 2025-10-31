@@ -27,7 +27,11 @@ Route::get('/admin/news', [NewsController::class, 'index'])->name('admin.news.in
 
 Route::get('/admin/news/create', [NewsController::class, 'create'])->name('admin.news.create');
 
-Route::get('/admin/news/{id}/edit', [NewsController::class, 'update'])->name('admin.news.edit');
+Route::get('/admin/news/{article}/edit', [NewsController::class, 'edit'])->name('admin.news.edit');
+
+Route::patch('/admin/news/{article}', [NewsController::class, 'update'])->name('admin.news.update');
+
+Route::delete('/admin/news/{article}', [NewsController::class, 'destroy'])->name('admin.news.destroy');
 
 Route::post('/admin', [NewsController::class, 'store'])->name('admin.news.store');
 // });

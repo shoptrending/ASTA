@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Contracts\Controller;
 use App\Http\Requests\StoreNewsArticleRequest;
+use App\Http\Requests\UpdateNewsArticleRequest;
 use App\Models\NewsArticle;
 use App\Models\User;
 use Illuminate\Contracts\View\View;
@@ -26,6 +27,14 @@ final class NewsController extends Controller
     }
 
     /**
+     * Display the specified news article.
+     */
+    public function show(NewsArticle $article) : View
+    {
+        return view('pages.admin.news.show', compact('article'));
+    }
+
+    /**
      * Show a form to create a news article.
      */
     public function create() : View
@@ -38,9 +47,9 @@ final class NewsController extends Controller
      */
     public function store(StoreNewsArticleRequest $request) : RedirectResponse
     {
-        // Todo: add user_id when login is done.
         $data = $request->validated();
 
+        // Todo: add user_id to form request when login is done.
         $user = User::where('username', '=', 'admin')->first();
 
         NewsArticle::create([
@@ -55,10 +64,38 @@ final class NewsController extends Controller
     }
 
     /**
-     * update an existing article.
+     * Show the form for editing the specified news article.
      */
-    public function update() : View
+    public function edit(int $id) : View
     {
-        //
+        $article = NewsArticle::findOrFail($id);
+
+        return view('pages.admin.news.edit', compact('article'));
+    }
+
+    /**
+     * Update the specified news article in storage.
+     */
+    public function update(UpdateNewsArticleRequest $request, NewsArticle $article) : RedirectResponse
+    {
+        $data = $request->validated();
+
+        $article->update([
+            'title' => $data['title'],
+            'content' => $data['content'],
+            'published_at' => $data['published_at'] ?? now(),
+        ]);
+
+        return redirect()->route('admin.news.index')->with('status', 'Artikel toegevoegd');
+    }
+
+    /**
+     * Destroy the specified article.
+     */
+    public function destroy(NewsArticle $article) : RedirectResponse
+    {
+        $article->delete();
+
+        return redirect()->route('admin.news.index')->with('status', 'Artikel verwijderd');
     }
 }

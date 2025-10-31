@@ -21,3 +21,10 @@
         </script>
     </body>
 </html>
+
+<style>
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+</style>

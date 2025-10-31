@@ -18,7 +18,7 @@
 
             <tr>
                 <td>
-                    <a href="{{ route('admin.news.edit', $article) }}" class="text-secondary me-2 hover pr-2" title="Bewerken">
+                    <a href="{{ route('admin.news.edit', $article->id) }}" class="text-secondary me-2 hover pr-2" title="Bewerken">
                         <i class="bi bi-pencil"></i>
                     </a>
                     {{ $article->title }}
