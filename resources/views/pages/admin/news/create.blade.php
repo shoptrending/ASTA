@@ -7,19 +7,9 @@
         <div class="col-lg-8">
             <h1 class="mb-4">Nieuw artikel</h1>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <strong>Er zijn fouten gevonden.</strong>
-                    <ul class="mb-0">
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-
             <form method="POST" action="{{ route('admin.news.store') }}">
                 @csrf
+
                 <div class="mb-3">
                     <label for="title" class="form-label">Titel</label>
                     <input type="text"
@@ -28,8 +18,9 @@
                            value="{{ old('title') }}"
                            required
                            class="form-control @error('title') is-invalid @enderror">
+
                     @error('title')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
@@ -40,8 +31,9 @@
                               rows="8"
                               required
                               class="form-control @error('content') is-invalid @enderror">{{ old('content') }}</textarea>
+
                     @error('content')
-                    <div class="invalid-feedback">{{ $message }}</div>
+                        <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
 
