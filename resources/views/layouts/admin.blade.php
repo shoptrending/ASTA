@@ -6,7 +6,7 @@
         :isAdmin="true"
     />
 
-    <body class="bg-dark">
+    <body>
         <x-admin.navbar />
 
         <main class="container">
@@ -25,7 +25,7 @@
 <style>
     html,
     body {
-        background-color: #121417;
+        background-color: #2a2f36;
         color: #e5e5e5;
         min-height: 100vh;
         margin: 0;
