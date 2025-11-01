@@ -1,16 +1,18 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /** @untested */
-class StoreNewsArticleRequest extends FormRequest
+final class StoreNewsArticleRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
-    public function authorize(): bool
+    public function authorize() : bool
     {
         return true;
     }
@@ -20,14 +22,14 @@ class StoreNewsArticleRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+    public function rules() : array
     {
         return [
-            'title' => ['required', 'string', 'min:3','max:255', 'unique:news_articles,title'],
+            'title' => ['required', 'string', 'min:3', 'max:255', 'unique:news_articles,title'],
             'content' => ['required', 'string'],
             'is_published' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
-//            'user_id' => ['nullable', 'exists:users,id'],
+            //            'user_id' => ['nullable', 'exists:users,id'],
         ];
     }
 }
