@@ -61,7 +61,7 @@ Route::middleware('auth')
     });
 
 // Fallback for non-existing routes...
-//Route::fallback(function () : RedirectResponse
-//{
-//    return redirect('/');
-//});
+Route::fallback(function () : RedirectResponse
+{
+    return redirect('/');
+});
