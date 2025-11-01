@@ -1,41 +1,53 @@
 @extends('layouts.admin')
 
 @section('content')
-    <h1 class="mb-4">Nieuwsbeheer</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="h3 fw-semibold text-light mb-0">Nieuwsbeheer</h1>
 
-    <x-button href="{{ route('admin.news.create') }}">Nieuw artikel</x-button>
+        <x-button href="{{ route('admin.news.create') }}">
+            <i class="bi bi-plus-circle me-1"></i>
+            Nieuw artikel
+        </x-button>
+    </div>
 
-    <table class="table table-striped">
-        <thead>
-        <tr>
-            <th>Titel</th>
-            <th class="text-center">Gepubliceerd</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="bg-dark border-0 shadow-sm">
+        <div class="card-body">
 
-        @forelse($articles as $article)
+            {{-- Table --}}
+            <table class="table table-dark table-hover align-middle mb-0">
+                <thead>
+                    <tr>
+                        <th>Titel</th>
+                        <th class="text-center">Gepubliceerd</th>
+                    </tr>
+                </thead>
+                <tbody>
 
-            <tr>
-                <td>
-                    <a href="{{ route('admin.news.edit', $article->id) }}" class="text-secondary me-2 hover pr-2" title="Bewerken">
-                        <i class="bi bi-pencil"></i>
-                    </a>
-                    {{ $article->title }}
-                </td>
+                    @forelse($articles as $article)
+                        <tr>
+                            <td>
+                                <a href="{{ route('admin.news.edit', $article->id) }}" class="text-secondary me-2 hover pr-2" title="Bewerken">
+                                    <i class="bi bi-pencil me-3"></i>
+                                </a>
+                                {{ $article->title }}
+                            </td>
+                            <td class="text-center">
 
-                @if($article->is_published)
-                    <td class="text-center"><i class="bi bi-check-lg text-success fs-4" /></td>
-                @else
-                    <td class="text-center"><i class="bi bi-x-lg text-danger fs-4" /></td>
-                @endif
+                                @if($article->is_published)
+                                    <i class="bi bi-check-circle-fill text-success" />
+                                @else
+                                    <i class="bi bi-x-circle text-danger" />
+                                @endif
 
-            </tr>
+                            </td>
+                        </tr>
 
-        @empty
-            <div class="alert alert-secondary">Nog geen artikelen...</div>
-        @endforelse
+                    @empty
+                        <div class="alert alert-secondary text-center mb-0">Nog geen artikelen...</div>
+                    @endforelse
 
-        </tbody>
-    </table>
+                </tbody>
+            </table>
+        </div>
+    </div>
 @endsection

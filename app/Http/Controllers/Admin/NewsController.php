@@ -66,10 +66,8 @@ final class NewsController extends Controller
     /**
      * Show the form for editing the specified news article.
      */
-    public function edit(int $id) : View
+    public function edit(NewsArticle $article) : View
     {
-        $article = NewsArticle::findOrFail($id);
-
         return view('pages.admin.news.edit', compact('article'));
     }
 

@@ -51,6 +51,7 @@
                            placeholder="YYYY-MM-DD HH:MM"
                            value="{{ old('published_at') }}"
                            class="form-control @error('published_at') is-invalid @enderror">
+
                     @error('published_at')
                     <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
@@ -65,16 +66,6 @@
                         <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">
                             Annuleren
                         </a>
-
-                        {{-- Confirm return modal --}}
-                        <x-confirm-modal
-                            id="cancelModal"
-                            title="Annuleren?"
-                            message="Weet je zeker dat je terug wilt gaan? Je wijzigingen zullen verloren gaan."
-                            confirmText="Ja, ga terug"
-                            cancelText="Blijven"
-                            :confirmAction="route('admin.news.index')"
-                        />
                     </div>
 
                     {{-- Delete button --}}
@@ -83,19 +74,30 @@
                            Verwijder
                         </button>
 
-                        {{-- Confirm delete modal --}}
-                        <x-confirm-modal
-                            id="deleteModal"
-                            title="Verwijderen?"
-                            message="Weet je zeker dat je het nieuwsartikel wilt verwijderen? Dit kan niet meer teruggedraaid worden."
-                            confirmText="Verwijderen"
-                            cancelText="Annuleren"
-                            :confirmAction="route('admin.news.destroy', $article)"
-                            :isDelete="true"
-                        />
                     </div>
                 </div>
             </form>
+
+            {{-- Confirm return modal --}}
+            <x-confirm-modal
+                id="cancelModal"
+                title="Annuleren?"
+                message="Weet je zeker dat je terug wilt gaan? Je wijzigingen zullen verloren gaan."
+                confirmText="Ja, ga terug"
+                cancelText="Blijven"
+                :confirmAction="route('admin.news.index')"
+            />
+
+            {{-- Confirm delete modal --}}
+            <x-confirm-modal
+                id="deleteModal"
+                title="Verwijderen?"
+                message="Weet je zeker dat je het nieuwsartikel wilt verwijderen? Dit kan niet meer teruggedraaid worden."
+                confirmText="Verwijderen"
+                cancelText="Annuleren"
+                :confirmAction="route('admin.news.destroy', $article)"
+                :isDelete="true"
+            />
         </div>
     </div>
 @endsection

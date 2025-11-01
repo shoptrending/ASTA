@@ -6,7 +6,7 @@
         :isAdmin="true"
     />
 
-    <body class="bg-light">
+    <body class="bg-dark">
         <x-admin.navbar />
 
         <main class="container">
@@ -23,8 +23,54 @@
 </html>
 
 <style>
+    html,
+    body {
+        background-color: #121417;
+        color: #e5e5e5;
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+    }
+
     a {
         text-decoration: none;
         color: inherit;
+    }
+
+    main.container {
+        margin-top: 3rem;
+        background-color: #1b2430;
+        border-radius: 14px;
+        padding: 2rem;
+        max-width: 1100px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
+
+    .table-hover tbody tr:hover {
+        background-color: #2a2f36 !important;
+        transition: background-color 0.2s ease;
+    }
+
+    .table-dark tr {
+        border-color: #2b2f36;
+    }
+
+    .table-dark tbody tr:hover {
+        background-color: #2c3139 !important;
+    }
+
+    .navbar .nav-link {
+        transition: color 0.2s ease, background-color 0.2s ease;
+    }
+
+    .navbar .nav-link:hover {
+        color: #0d6efd !important;
+    }
+
+    .active-link {
+        color: #0d6efd !important;
+        font-weight: 600;
+        background-color: rgba(13, 110, 253, 0.1);
+        border-radius: 8px;
     }
 </style>

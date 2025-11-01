@@ -29,14 +29,10 @@ Route::get('/admin/vacancies', [VacanciesController::class, 'index'])
     ->name('admin.vacancies.index');
 
 // Contact...
-Route::get('/admin/contact', [ ContactController::class, 'index'])
+Route::get('/admin/contact', [ContactController::class, 'index'])
     ->name('admin.contact.index');
 
 // News...
-//Route::resource('/admin/news', NewsController::class)
-//    ->names('admin.news')
-//    ->parameters(['news' => 'article']);
-
 Route::get('/admin/news', [NewsController::class, 'index'])
     ->name('admin.news.index');
 
