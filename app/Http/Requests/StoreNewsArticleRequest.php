@@ -29,7 +29,7 @@ final class StoreNewsArticleRequest extends FormRequest
             'content' => ['required', 'string'],
             'is_published' => ['nullable', 'boolean'],
             'published_at' => ['nullable', 'date'],
-            //            'user_id' => ['nullable', 'exists:users,id'],
+            'user_id' => ['nullable', 'exists:users,id'],
         ];
     }
 }

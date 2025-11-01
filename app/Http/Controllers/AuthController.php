@@ -7,11 +7,10 @@ namespace App\Http\Controllers;
 use App\Contracts\Controller;
 use App\Http\Requests\LoginUserRequest;
 use App\Models\User;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\ValidationException;
 
 /** @untested-ignore */
@@ -32,7 +31,7 @@ final class AuthController extends Controller
     {
         // Pass the validated attributes of the
         // request to attempt a login...
-        if(! Auth::attempt($request->validated()))
+        if (! Auth::attempt($request->validated()))
         {
             throw ValidationException::withMessages([
                 'auth' => 'Onjuiste gebruikersnaam of wachtwoord.',
