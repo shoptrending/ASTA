@@ -10,36 +10,49 @@ use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Validation\ValidationException;
 
 /** @untested-ignore */
 final class AuthController extends Controller
 {
     /**
+     * Create a login form.
+     */
+    public function create() : View
+    {
+        return view('pages.auth.login');
+    }
+
+    /**
      * Log the user in.
      */
-    public function login(LoginUserRequest $request) : JsonResponse
+    public function login(LoginUserRequest $request) : RedirectResponse
     {
-        // Check if login credentials are valid...
-        if (! Auth::attempt($request->only(keys: ['email', 'password'])))
+        // Pass the validated attributes of the
+        // request to attempt a login...
+        if(! Auth::attempt($request->validated()))
         {
-            return $this->error(message: 'Invalid credentials', statusCode: 401);
+            throw ValidationException::withMessages([
+                'auth' => 'Onjuiste gebruikersnaam of wachtwoord.',
+            ]);
         }
 
-        $user = User::firstWhere('email', $request['email']);
+        // Recycle the session token to prevent session
+        // hijacking because of old tokens...
+        $request->session()->regenerate();
 
-        return $this->ok(
-            message: "Hello, {$user->username}",
-            data: ['token' => $user->generateApiToken()],
-        );
+        return redirect()->route('admin.news.index')->with('status', 'Succesvol ingelogd');
     }
 
     /**
      * Log the user out.
      */
-    public function logout(Request $request) : JsonResponse
+    public function logout(Request $request) : RedirectResponse
     {
-        $request->user()->currentAccessToken()->delete();
+        Auth::logout();
 
-        return $this->ok(message: "Logged out {$request->user()->username}");
+        return redirect('/')->with('status', 'Succesvol uitgelogd');
     }
 }

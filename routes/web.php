@@ -11,14 +11,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', fn () => view('pages.welcome'))->name('home');
 
-Route::get('/login', [AuthController::class, 'login'])
-    ->name('login');
+Route::get('/login', [AuthController::class, 'create'])
+    ->name('auth.create');
+
+Route::post('/login', [AuthController::class, 'login'])
+    ->name('auth.login');
 
 // Todo: add the middleware when a login page is added...
 // Route::middleware('auth:sanctum')->group(function ()
 // {
 Route::post('/logout', [AuthController::class, 'logout'])
-    ->name('logout');
+    ->name('auth.logout');
 
 // Dashboard...
 Route::get('/admin/dashboard', [DashboardController::class, 'index'])

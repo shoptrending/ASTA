@@ -42,7 +42,7 @@
             </ul>
 
             {{-- Logout button --}}
-            <form method="POST" action="{{ route('logout') }}" class="d-flex">
+            <form method="POST" action="{{ route('auth.logout') }}" class="d-flex">
                 @csrf
                 <button class="btn btn-sm btn-outline-primary d-flex align-items-center" type="submit">
                     <i class="bi bi-box-arrow-right me-1"></i> Uitloggen

@@ -13,18 +13,15 @@
                 @method('PATCH')
 
                 <div class="mb-3">
-                    <label for="title" class="form-label">Titel</label>
-                    <input type="text"
-                           id="title"
-                           name="title"
-                           class="form-control @error('title') is-invalid @enderror"
-                           value="{{ old('title', $article->title) }}"
-                           required
-                    />
+                    <x-form.label for="title">Titel</x-form.label>
+                    <x-form.input id="title"
+                                  name="title"
+                                  class="@error('title') is-invalid @enderror"
+                                  value="{{ old('title', $article->title) }}"
+                                  required
+                    ></x-form.input>
 
-                    @error('title')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                    <x-form.error name="title" />
                 </div>
 
                 <div class="mb-3">
@@ -61,7 +58,8 @@
 
                     {{-- Submit and cancel buttons --}}
                     <div class="d-flex gap-2">
-                        <button type="submit" class="btn btn-primary">Bewerk</button>
+{{--                        <button type="submit" class="btn btn-primary">Bewerk</button>--}}
+                        <x-form.button>Bewerk</x-form.button>
 
                         <a href="#" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#cancelModal">
                             Annuleren
