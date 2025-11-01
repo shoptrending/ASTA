@@ -42,12 +42,12 @@
             </ul>
 
             {{-- Logout button --}}
-            <form method="POST" action="{{ route('logout') }}" class="d-flex">
-                @csrf
-                <button class="btn btn-sm btn-outline-primary d-flex align-items-center" type="submit">
-                    <i class="bi bi-box-arrow-right me-1"></i> Uitloggen
-                </button>
-            </form>
+                <form method="POST" action="{{ route('admin.logout') }}" class="d-flex">
+                    @csrf
+                    <button class="btn btn-sm btn-outline-primary d-flex align-items-center" type="submit">
+                        <i class="bi bi-box-arrow-right me-1"></i> Uitloggen
+                    </button>
+                </form>
         </div>
     </div>
 </nav>
